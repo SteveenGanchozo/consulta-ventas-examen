@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Consultas de Ventas</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<a class="navbar-brand" href="/products">Consulta de Ventas</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ">
+					<li class="nav-item"><a class="nav-link disabled"
+						href="/create_user">Crear Usuario</a></li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link disabled"
+						href="/">Login</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+
+	<br>
+	<div class="container text/center">
+		<form class="form-inline" th:action="@{/consult}">
+			<div class="form-group mb-1">
+				<label>Folio de Ventas: </label>
+				<div class="form-group mx-sm-3">
+					<input type="number" name="idProduct" class="form-control"
+						id="idProduct" th:value="${idProduct}"
+						placeholder="Numero del producto">
+				</div>
+				<input type="submit" class="btn btn-info" value="Consultar">
+			</div>
+		</form>
+		<br> <a class="btn btn-primary" href="/new_product">Agregar
+			Producto</a> <br> <br>
+		<table class="table table-bordered table-dark" id="products">
+			<thead class="thead-dark text-center">
+				<tr>
+					<th scope="col">No.</th>
+					<th scope="col">Producto</th>
+					<th scope="col">Cantidad</th>
+					<th scope="col">Precio Unitario</th>
+					<th scope="col">Total</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="text-center" th:each="producto :${listProducts}">
+					<td th:text="${producto.id}"></td>
+					<td th:text="${producto.name}"></td>
+					<td th:text="${producto.amount}"></td>
+					<td th:text="${producto.unit_price}"></td>
+					<td th:text="${producto.total}"></td>
+					<td><a class="btn btn-primary "
+						th:href="@{'/update_product/' + ${producto.id}}">Editar</a> <a
+						class="btn btn-danger" th:href="@{'/delete_product/' + ${producto.id}}">Eliminar</a>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td class="text-right" colspan="2">Total Productos :</td>
+					<td class="text-center" id="tdTotal"></td>
+					<td class="text-right" colspan="">Total Ventas :</td>
+					<td class="text-center" id="tdSales"></td>
+				</tr>
+			</tfoot>
+		</table>
+
+	</div>
+<script type="text/javascript">
+	window.addEventListener("load", function(){
+		sumAmount();
+	})
+	
+	function sumAmount(){
+		let total=0;
+		let sale=0;
+		const table =document.getElementById("products");
+		for(let i = 1; i<table.rows.length-1;i++){
+			let rowValue = table.rows[i].cells[2].innerHTML;
+			let rowValue2 = table.rows[i].cells[4].innerHTML;
+			total = total + Number(rowValue);
+			sale = sale + Number(rowValue2);
+		}
+		const tdTotal = document.getElementById("tdTotal");
+		tdTotal.textContent = total;
+		
+		const tdSales = document.getElementById("tdSales");
+		tdSales.textContent = sale;
+	}
+</script>
+</body>
+</html>

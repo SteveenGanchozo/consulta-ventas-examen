@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="/">Consulta de Ventas</a>
+	</nav>
+
+	<br>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center">Login</h1>
+				<div class="card-body">
+					<form th:action="@{/products}">
+						<div class="form=group">
+							<label>Usuario : </label> <input type="text" name="user"
+							 class="form-control"
+								placeholder="Digite el Usuario">
+						</div>
+						<div class="form=group">
+							<label>Contraseña :</label> <input  type="text"
+								name="password" class="form-control"
+								placeholder="Digite la Contraseña">
+						</div>
+						<br>
+						<div class="box-footer text-center">
+							<button class="btn btn-success">Ingresar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
